@@ -75,6 +75,7 @@ video#bgvid {
 }
 #mc_embed_signup .button {
 	background-color: #51ccc5;
+    margin: 20px;
 }
 
 .mailchimp {

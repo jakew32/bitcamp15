@@ -1,8 +1,10 @@
+from __future__ import division
 __author__ = 'Jake'
+
 
 from pyechonest import config
 from pyechonest import song
-import os, csv, json, operator
+import os, csv, json, operator, twitter
 from metamind.api import set_api_key, ClassificationModel
 
 set_api_key("uqakkdVZiUUr62KISE5pM4GKiAZNaHXXT9B1umpPhIxlOiWZWQ")
@@ -44,22 +46,22 @@ def categorize_tweets_csv():
             print resultant_song.title + " - " + resultant_song.artist_name + " happy " + str(happy) + " excite " + str(exclamation_percentage)
 
 def pick_song(predict_list):
-    mood_counts = {"sad": 0, "excited": 0, "happy": 0, "motivated": 0, "angry": 0, "energetic": 0}
-    for input in predict_list:
-        class_result = ClassificationModel(id=25009).predict(input, input_type="text")
+    mood_counts = {"sad": 0.0, "excited": 0.0, "happy": 0.0, "motivated": 0.0, "angry": 0.0, "energetic": 0.0}
+    for input in predict_list["content"]["statuses"]:
+        class_result = ClassificationModel(id=25073).predict(input["text"], input_type="text")
         jsonres = json.loads(json.dumps(class_result[0]))
         mood = jsonres['label'].lower()
-        mood_counts[mood] += 1
+        mood_counts[mood] += 1.0
 
     moods = max(mood_counts.iteritems(), key=operator.itemgetter(1))
     total = sum(mood_counts.values())
-    proportion = {key: (mood_counts[key]/total) for key in mood_counts.keys()}
-    sad = {"max_danceability": .3, "max_tempo": "110", "min_acousticness": .3, "min_speechiness": .3, "mood": "sad"}
-    excited = {"min_danceability": .3, "min_tempo": 100, "min_energy": .5, "max_acousticness": .4}
-    happy = {"max_danceability": .5, "max_energy": .6, "mood": "happy"}
-    motivated= {"min_danceability": .4, "min_energy": .5, "max_acousticness": .4, "max_speechiness": .5, "min_tempo":100}
-    angry = {"min_energy": .5, "max_acousticness": .3, "mood": "angry"}
-    energetic = {"min_energy": .65, "min_tempo": 110, "max_acousticness": .5, "max_speechiness": .6}
+    proportion = {key: (mood_counts[key]/float(total)) for key in mood_counts.keys()}
+    sad = {"max_danceability": .3, "max_tempo": 110.0, "min_acousticness": .3, "min_speechiness": .3}
+    excited = {"min_danceability": .3, "min_tempo": 100.0, "min_energy": .5, "max_acousticness": .4}
+    happy = {"max_danceability": .5, "max_energy": .6}
+    motivated= {"min_danceability": .4, "min_energy": .5, "max_acousticness": .4, "max_speechiness": .5, "min_tempo":100.0}
+    angry = {"min_energy": .5, "max_acousticness": .3}
+    energetic = {"min_energy": .65, "min_tempo": 110.0, "max_acousticness": .5, "max_speechiness": .6}
     sad = {key: (sad[key] * proportion["sad"]) for key in sad.iterkeys()}
     sad["proportion"] = proportion["sad"]
     excited = {key: (excited[key] * proportion["excited"]) for key in excited.iterkeys()}
@@ -81,12 +83,10 @@ def pick_song(predict_list):
                                 min_danceability=result.get("min_danceability", 0), max_speechiness=result.get("max_speechiness", 1),
                                 min_speechiness=result.get("min_speechiness", 0), max_energy=result.get("max_energy", 1),
                                 min_energy=result.get("min_energy", 0), max_acousticness=result.get("max_acousticness", 1),
-                                min_acousticness=result.get("min_acousticness", 0), mood=result.get(mood))
+                                min_acousticness=result.get("min_acousticness", 0))
 
     oursong = songs_results[0] # is a slammin screen door, stayin out late, sneakin out your window
     print oursong.title + " - " + oursong.artist_name
-
-pick_song(["I am very excited!", "Today sucks", "I'm feeling productive!"])
-
+    return oursong
 
 

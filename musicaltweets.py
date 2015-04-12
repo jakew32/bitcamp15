@@ -16,7 +16,7 @@ def parse_hashtag(toparse):
 
 @app.route('/analyze/username/<username>')
 def parse_username(username):
-    song = logic.pick_song(twitter.userSearch(username))
+    song = logic.pick_song_user(twitter.userSearch(username))
     return song.title + " - " + song.artist_name
 
 if __name__ == '__main__':

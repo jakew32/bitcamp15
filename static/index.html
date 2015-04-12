@@ -16,6 +16,12 @@
     <link href="css/launchrocket.css" rel="stylesheet">
 
 	<script>
+        document.getElementById("mc-embedded-subscribe").addEventListener("click", function(event){
+    event.preventDefault()
+});
+        document.getElementById("username_button").addEventListener("click", function(event){
+    event.preventDefault()
+});
 		function loadXMLDoc()
 		{
 			var someVar = document.getElementById('hashtag').value;
@@ -79,13 +85,11 @@
 	<!-- Begin MailChimp Signup Form -->
 	<!-- Note: You'll want to replace the form action and the input name with values from your own MailChimp account -->
 		<div class="mailchimp" id="mc_embed_signup">
-			<form id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" novalidate>
 			<input type="email" value="" name="EMAIL" class="email" id="hashtag" placeholder="hashtag" required>
 			<input type="email" value="" name="EMAIL" class="email" id="username" placeholder="username" required>
 						
-			<input type="submit" value="Check Hashtag" name="subscribe" id="mc-embedded-subscribe" class="button" onclick="loadXMLDoc()">
-            <input type="submit" value="Check Username" name="username-button" id="username_button" class="button" onclick="loadXMLDocUser()">
-			</form>
+			<button type="button" name="subscribe" id="mc-embedded-subscribe" class="button" onclick="loadXMLDoc()">Check Hashtag</button>
+            <button type="button" name="username-button" id="username_button" class="button" onclick="loadXMLDocUser()">Check Username</button>
 			<p id="whereitgoes"></p>
 			<p><iframe src="https://embed.spotify.com/?uri=spotify%3Atrack%3A3XSczvk4MRteOw4Yx3lqMU" width="300" height="380" frameborder="0" allowtransparency="true"></iframe></p>
 		</div>

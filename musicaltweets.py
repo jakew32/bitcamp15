@@ -1,13 +1,13 @@
 from flask import Flask, jsonify
-import logic, twitter
+import logic, twitter, os
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path="")
 
 import json
 
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
+    return app.send_static_file("index.html")
 
 @app.route('/analyze/hashtag/<toparse>')
 def parse_hashtag(toparse):
@@ -20,4 +20,4 @@ def parse_username(username):
     return song.title + " - " + song.artist_name
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', debug=True)

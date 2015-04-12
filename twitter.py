@@ -34,5 +34,5 @@ def userSearch(user):
          )
     tuo = TwitterUserOrder(user) # create a TwitterUserOrder
     # start asking Twitter about the timeline
-    return ts.search_tweets_iterable(tuo)
+    return ts.search_tweets(tuo)
 

@@ -9,10 +9,6 @@ set_api_key("uqakkdVZiUUr62KISE5pM4GKiAZNaHXXT9B1umpPhIxlOiWZWQ")
 
 config.ECHO_NEST_API_KEY = "DLBFUV54VPZIDBJO7"
 
-""" rkp_results = song.search(mood="happy, excited", artist_min_familiarity=.75)
-
- """
-
 def categorize_tweets_csv():
     for tweetsfile in os.listdir(os.getcwd()):
         excitements = []
@@ -89,11 +85,6 @@ def pick_song(predict_list):
 
     oursong = songs_results[0] # is a slammin screen door, stayin out late, sneakin out your window
     print oursong.title + " - " + oursong.artist_name
-
-
-
-# sad, excited, happy, motivated, angry, energetic
-# tempo, danceability, speechiness, energy, acousticness
 
 pick_song(["I am very excited!", "Today sucks", "I'm feeling productive!"])
 

@@ -21,3 +21,7 @@ Challenges we ran into:
 
 Most of the emotional analysis tools classify text in two categories. We wanted to match songs of different genres and attributes therefore we had to classify text in 6 emotions. Initially we faced problems training our data set but with the help of the beautiful MetaMind API and Wolfram Mathematica we classified into 6 emotions.
 
+
+What's next for Songbird:
+
+Android mobile app which plays your playlist based on tweets on a particular event Connect with Spotify API to integrate playing through our website

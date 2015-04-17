@@ -2,8 +2,6 @@ __author__ = 'Jake'
 
 from TwitterSearch import *
 
-
-
 def hashtagSearch(hashtag):
     ts = TwitterSearch(
             consumer_key = 'UIBl6otwQD9CtbhRQSQ2GlV8H',
@@ -35,4 +33,3 @@ def userSearch(user):
     tuo = TwitterUserOrder(user) # create a TwitterUserOrder
     # start asking Twitter about the timeline
     return ts.search_tweets(tuo)
-

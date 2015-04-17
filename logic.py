@@ -1,7 +1,6 @@
 from __future__ import division
 __author__ = 'Jake'
 
-
 from pyechonest import config
 from pyechonest import song
 import os, csv, json, operator, twitter
@@ -133,5 +132,3 @@ def pick_song_user(predict_list):
     oursong = songs_results[0] # is a slammin screen door, stayin out late, sneakin out your window
     print oursong.title + " - " + oursong.artist_name
     return oursong
-
-
